@@ -1,4 +1,4 @@
-import { renderGallery } from './render-functions.js'; // Імпорт функції renderGallery
+import { renderGallery } from './render-functions.js';
 
 const searchForm = document.querySelector('.form');
 const inputElement = document.querySelector('.search-input');
@@ -43,6 +43,7 @@ async function submitHandle(event) {
       });
     } else {
       renderGallery(images);
+      inputElement.value = '';
     }
   } catch (error) {
     console.error('Error fetching images:', error);

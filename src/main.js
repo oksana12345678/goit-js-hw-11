@@ -1,3 +1,3 @@
 import './js/pixabay-api';
-// import './js/render-functions';
 import './css/loader-styles.css';
+import 'simplelightbox/dist/simple-lightbox.min.css';
