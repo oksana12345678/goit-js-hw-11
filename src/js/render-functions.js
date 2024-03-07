@@ -3,7 +3,11 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const galleryElement = document.querySelector('.gallery');
 
-const lightbox = new SimpleLightbox('.card');
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
 lightbox.refresh();
 
 export function renderGallery(images) {
@@ -23,25 +27,31 @@ export function renderGallery(images) {
     img.alt = image.tags;
     link.appendChild(img);
 
+    const container = document.createElement('div');
+    container.classList.add('container');
+    card.appendChild(container);
+
     const likes = document.createElement('div');
-    likes.textContent = `Likes: ${image.likes}`;
-    card.appendChild(likes);
+    likes.textContent = `Likes  ${image.likes}`;
+    likes.classList.add('item-description');
+    container.appendChild(likes);
 
     const views = document.createElement('div');
-    views.textContent = `Views: ${image.views}`;
-    card.appendChild(views);
+    views.textContent = `Views ${image.views}`;
+    views.classList.add('item-description');
+    container.appendChild(views);
 
     const comments = document.createElement('div');
-    comments.textContent = `Comments: ${image.comments}`;
-    card.appendChild(comments);
+    comments.textContent = `Comments ${image.comments}`;
+    comments.classList.add('item-description');
+    container.appendChild(comments);
 
     const downloads = document.createElement('div');
-    downloads.textContent = `Downloads: ${image.downloads}`;
-    card.appendChild(downloads);
+    downloads.textContent = `Downloads ${image.downloads}`;
+    downloads.classList.add('item-description');
+    container.appendChild(downloads);
 
     galleryElement.appendChild(card);
   });
   lightbox.refresh();
 }
-
-
