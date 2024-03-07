@@ -2,6 +2,7 @@ import { renderGallery } from './render-functions.js'; // Імпорт функ�
 
 const searchForm = document.querySelector('.form');
 const inputElement = document.querySelector('.search-input');
+const loader = document.querySelector('.loader');
 
 const API_KEY = '42710952-cb07850fe6c5f6774b64d780f';
 const baseURL = 'https://pixabay.com/api/';
@@ -12,21 +13,25 @@ async function fetchImages(searchQuery) {
   const data = await response.json();
   return data.hits;
 }
+hideLoader();
 
 searchForm.addEventListener('submit', submitHandle);
 
 async function submitHandle(event) {
   event.preventDefault();
+  showLoader();
   const searchTerm = inputElement.value.trim();
+
   if (searchTerm === '') {
     iziToast.error({
       title: 'Error',
       message: 'Please enter a search term.',
       position: 'topCenter',
     });
+
     return;
   }
-
+  showLoader();
   try {
     const images = await fetchImages(searchTerm);
     if (images.length === 0) {
@@ -37,7 +42,7 @@ async function submitHandle(event) {
         position: 'topCenter',
       });
     } else {
-      renderGallery(images); // Виклик функції renderGallery
+      renderGallery(images);
     }
   } catch (error) {
     console.error('Error fetching images:', error);
@@ -46,5 +51,14 @@ async function submitHandle(event) {
       message: 'Failed to fetch images. Please try again later.',
       position: 'topCenter',
     });
+  } finally {
+    hideLoader();
   }
+}
+function showLoader() {
+  loader.classList.remove('hidden');
+}
+
+function hideLoader() {
+  loader.classList.add('hidden');
 }
