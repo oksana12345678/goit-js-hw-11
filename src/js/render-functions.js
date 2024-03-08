@@ -1,6 +1,6 @@
 import SimpleLightbox from 'simplelightbox';
 
-const galleryElement = document.querySelector('.gallery');
+export const galleryElement = document.querySelector('.gallery');
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
