@@ -13,14 +13,13 @@ searchForm.addEventListener('submit', submitHandle);
 
 async function submitHandle(event) {
   event.preventDefault();
-  showLoader();
   const searchTerm = inputElement.value.trim();
 
   if (searchTerm === '') {
     iziToast.error({
       title: 'Error',
       message: 'Please enter a search term.',
-      position: 'topCenter',
+      position: 'topCenter', 
     });
 
     return;
